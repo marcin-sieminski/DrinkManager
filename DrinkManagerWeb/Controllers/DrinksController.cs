@@ -17,6 +17,7 @@ namespace DrinkManagerWeb.Controllers
     {
         private readonly IDrinkRepository _drinkRepository;
         private readonly IDrinkSearchService _drinkSearchService;
+        private readonly IDrinkFavouriteService _drinkFavouriteService;
 
         public DrinksController(IDrinkRepository drinkRepository, IDrinkSearchService drinkSearchService)
         {
@@ -216,7 +217,8 @@ namespace DrinkManagerWeb.Controllers
             {
                 // add error View
             }
-            drink.IsFavourite = true;
+
+            drink = _drinkFavouriteService.MakeItFavourite(drink);
 
             _drinkRepository.Update(drink);
             await _drinkRepository.SaveChanges();
@@ -231,7 +233,7 @@ namespace DrinkManagerWeb.Controllers
             {
                 // add error View
             }
-            drink.IsFavourite = false;
+            drink = _drinkFavouriteService.MakeItNotFavourite(drink);
 
             _drinkRepository.Update(drink);
             await _drinkRepository.SaveChanges();
