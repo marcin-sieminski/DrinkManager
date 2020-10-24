@@ -5,14 +5,20 @@ using Xunit;
 
 namespace Tests
 {
-    public class DrinkReviewServiceShould
+    public class DrinkReviewServiceShould : IClassFixture<TestWithSqlite>
     {
+        private readonly TestWithSqlite _fixture;
+
+        public DrinkReviewServiceShould(TestWithSqlite fixture)
+        {
+            _fixture = fixture;
+        }
         [Fact]
         public void AddReviewToDrink()
         {
-            var drinkList = new SampleDrinkCreator().GetTestDrinks();
+            var list = _fixture.Repository.GetAllDrinks();
             var reviewService = new DrinkReviewService();
-            var drink = drinkList.First(x => x.DrinkId == "1");
+            var drink = list.First(x => x.Name == "Cuba Libra");
 
             reviewService.AddReview("Cool", 4, drink);
 
@@ -21,11 +27,12 @@ namespace Tests
         [Fact]
         public void ChangeReviewEvenThoughItShouldNot()
         {
-            var drinkList = new SampleDrinkCreator().GetTestDrinks();
+            var list = _fixture.Repository.GetAllDrinks();
             var reviewService = new DrinkReviewService();
-            var drink = drinkList.First(x => x.DrinkId == "1");
-            var savedScore = drink.DrinkReview.ReviewScore;
+            var drink = list.First(x => x.Name == "Cuba Libre");
 
+            reviewService.AddReview("Cool", 4, drink);
+            var savedScore = drink.DrinkReview.ReviewScore;
             reviewService.AddReview("Very Good", 5, drink);
 
             drink.DrinkReview.ReviewScore.Should().NotBe(savedScore);
