@@ -80,13 +80,7 @@ namespace Tests
                     AlcoholicInfo = "Non Alcoholic",
                     Category = "Not special",
                     DrinkId = "2",
-                    DrinkReview = new DrinkReview()
-                    {
-                        Id = 2,
-                        ReviewDate = DateTime.Now,
-                        ReviewScore = 2,
-                        ReviewText = "Nah"
-                    },
+                    DrinkReview = null,
                     GlassType = "Irregular",
                     ImageUrl = "",
                     Ingredients = new List<Ingredient>()

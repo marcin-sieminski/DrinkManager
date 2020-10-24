@@ -2,7 +2,7 @@
 
 namespace DrinkManagerWeb.Services
 {
-    interface IDrinkFavouriteService
+    public interface IDrinkFavouriteService
     {
         Drink MakeItFavourite(Drink drink);
         Drink MakeItNotFavourite(Drink drink);

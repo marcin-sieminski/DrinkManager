@@ -18,12 +18,15 @@ namespace DrinkManagerWeb.Controllers
         private readonly IDrinkRepository _drinkRepository;
         private readonly IDrinkSearchService _drinkSearchService;
         private readonly IDrinkFavouriteService _drinkFavouriteService;
+        private readonly IDrinkReviewService _drinkReviewService;
         private readonly int _pageSize = 12;
 
-        public DrinksController(IDrinkRepository drinkRepository, IDrinkSearchService drinkSearchService)
+        public DrinksController(IDrinkRepository drinkRepository, IDrinkSearchService drinkSearchService, IDrinkFavouriteService drinkFavouriteService, IDrinkReviewService drinkReviewService)
         {
             _drinkRepository = drinkRepository;
             _drinkSearchService = drinkSearchService;
+            _drinkFavouriteService = drinkFavouriteService;
+            _drinkReviewService = drinkReviewService;
         }
 
         public IActionResult Index(string sortOrder, int? pageNumber)
@@ -247,7 +250,6 @@ namespace DrinkManagerWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReview(IFormCollection data, string? id)
         {
-
             var drinkToUpdate = await _drinkRepository.GetDrinkById(id);
 
             if (drinkToUpdate == null)
@@ -255,16 +257,8 @@ namespace DrinkManagerWeb.Controllers
                 TempData["Alert"] = "Drink not found.";
                 return RedirectToAction(nameof(Index));
             }
-
-            drinkToUpdate.DrinkReview = new DrinkReview
-            {
-                ReviewText = data["DrinkReview.ReviewText"],
-                ReviewScore = int.Parse(data["DrinkReview.ReviewScore"])
-            };
-
-            drinkToUpdate.IsReviewed = true;
-            drinkToUpdate.DrinkReview.ReviewDate = DateTime.Now;
-
+            drinkToUpdate = _drinkReviewService.AddReview(data["DrinkReview.ReviewText"], int.Parse(data["DrinkReview.ReviewScore"]), drinkToUpdate);
+            
             _drinkRepository.Update(drinkToUpdate);
             await _drinkRepository.SaveChanges();
 
