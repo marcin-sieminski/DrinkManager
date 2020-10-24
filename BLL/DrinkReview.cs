@@ -16,5 +16,7 @@ namespace BLL
         public string ReviewText { get; set; }
 
         public DateTime ReviewDate { get; set; }
+
+        public string DrinkId { get; set; }
     }
 }

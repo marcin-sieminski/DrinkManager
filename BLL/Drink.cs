@@ -20,7 +20,7 @@ namespace BLL
         public string ImageUrl { get; set; }
         public List<Ingredient> Ingredients { get; set; }
         public DrinkReview DrinkReview { get; set; }
-        public bool IsReviewed => DrinkReview != null;
+        public bool IsReviewed { get; set; }
         public bool IsFavourite { get; set; }
     }
 }

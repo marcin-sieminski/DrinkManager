@@ -1,0 +1,39 @@
+﻿@model DrinkManagerWeb.Models.ViewModels.DrinkCreateViewModel
+
+@{
+    ViewBag.Title = $"Review of {Model.Name}";
+    Layout = "_Layout";
+}
+
+<div class="row px-4">
+    <div class="col-12">
+        <h1>Review of @Model.Name</h1>
+        <hr />
+        <form asp-antiforgery="true" asp-action="AddReview" asp-controller="Drinks" asp-route-id="@(Model.Id)" method="post">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="DrinkReview.ReviewText">Review</label>
+                    <input type="text" class="form-control" asp-for="DrinkReview.ReviewText" placeholder="ReviewText">
+                    <span asp-validation-for="DrinkReview.ReviewText" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="DrinkReview.ReviewScore">Drink score:</label>
+                    <div asp-for="DrinkReview.ReviewScore">
+                        <div class="rating" style="width: 20rem">
+                            <input id="rating-5" type="radio" name="DrinkReview.ReviewScore" value="5" /><label for="rating-5"><i class="fas fa-3x fa-star"></i></label>
+                            <input id="rating-4" type="radio" name="DrinkReview.ReviewScore" value="4" /><label for="rating-4"><i class="fas fa-3x fa-star"></i></label>
+                            <input id="rating-3" type="radio" name="DrinkReview.ReviewScore" value="3"/><label for="rating-3"><i class="fas fa-3x fa-star"></i></label>
+                            <input id="rating-2" type="radio" name="DrinkReview.ReviewScore" value="2" /><label for="rating-2"><i class="fas fa-3x fa-star"></i></label>
+                            <input id="rating-1" type="radio" name="DrinkReview.ReviewScore" value="1" checked /><label for="rating-1"><i class="fas fa-3x fa-star"></i></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3 border-top">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

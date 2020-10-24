@@ -61,7 +61,8 @@ namespace DrinkManagerWeb.Models.ViewModels
         public string Ingredient15 { get; set; }
         public string Amount15 { get; set; }
 
-
         public List<Ingredient> Ingredients { get; set; }
+
+        public DrinkReview DrinkReview { get; set; }
     }
 }

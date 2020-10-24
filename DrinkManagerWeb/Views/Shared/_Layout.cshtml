@@ -49,9 +49,8 @@
                     <li class="nav-item d-flex align-items-center my-2 mr-3 mt-md-0 mr-md-0 mb-0 mb-md-3 @(routeValues["Action"].ToString() == "FavouriteDrinks" ? "active" : "")">
                         <a class="nav-link rounded p-3" asp-area="" asp-controller="Drinks" asp-action="FavouriteDrinks"><i class="fas fa-heart"></i><span>Favourite drinks</span></a>
                     </li>
-                    <li class="nav-item d-flex align-items-center @(routeValues["Action"].ToString() == "Index" ? "active" : "")">
-
-                        <a class="nav-link rounded p-3" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-star"></i><span>Reviewed drinks</span></a>
+                    <li class="nav-item d-flex align-items-center @(routeValues["Action"].ToString() == "ReviewedDrinks" ? "active" : "")">
+                        <a class="nav-link rounded p-3" asp-area="" asp-controller="Drinks" asp-action="ReviewedDrinks"><i class="fas fa-star"></i><span>Reviewed drinks</span></a>
                     </li>
                 </ul>
             </nav>

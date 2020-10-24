@@ -23,8 +23,8 @@ namespace BLL.Data.Repositories
 
         public Task<Drink> GetDrinkById(string id)
         {
-
-            return _context.Drinks.Include(i => i.Ingredients).FirstOrDefaultAsync(d => d.DrinkId.Equals(id));
+            return _context.Drinks.Include(i => i.Ingredients).Include(i => i.DrinkReview)
+                .FirstOrDefaultAsync(d => d.DrinkId.Equals(id));
         }
 
         public Task<Drink> FindDrink(Expression<Func<Drink, bool>> predicate)

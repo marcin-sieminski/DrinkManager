@@ -10,6 +10,7 @@ namespace BLL.Data
 
         public DbSet<Drink> Drinks { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<DrinkReview> DrinkReviews { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,0 +1,18 @@
+﻿@model DrinkManagerWeb.Models.ViewModels.DrinksViewModel
+
+@{
+    ViewBag.Title = "Drinks";
+    Layout = "_Layout";
+}
+
+<div class="row px-4">
+    <div class="col-12">
+        <header class="d-flex align-items-center">
+            <h1>Reviewed Drinks List</h1>
+            <div class="buttons ml-auto">
+            </div>
+        </header>
+        <partial name="Partials/DrinkList" model="@Model"/>
+        <partial name="Partials/Pagination" model="@Model"/>
+    </div>
+</div>

@@ -69,16 +69,23 @@
         </div>
         <div class="card">
             <div class="mb-3 card-header">
-                <h4>Reviews</h4>
+                <h4>Review</h4>
             </div>
             <div class="card-body">
                 @if (Model.DrinkReview == null)
                 {
-                    <p>No reviews</p>
+                    <a asp-controller="Drinks" asp-action="AddReview" asp-route-id="@Model.DrinkId" class="btn btn-primary mr-3">Add Review</a>
                 }
                 else
                 {
-                    <p>@Model.DrinkReview</p>
+            <p>
+                @for (var i = @Model.DrinkReview.ReviewScore; i > 0; i--)
+                {
+                    <span class="fa fa-star checked"></span>
+                }
+            </p>
+                    <p>@Model.DrinkReview.ReviewText</p>
+                    <p>Date of Review: @Model.DrinkReview.ReviewDate</p>
                 }
             </div>
         </div>

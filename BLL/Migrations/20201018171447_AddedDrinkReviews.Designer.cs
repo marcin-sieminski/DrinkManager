@@ -4,14 +4,16 @@ using BLL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrinkManagerWeb.Migrations
 {
     [DbContext(typeof(DrinkAppContext))]
-    partial class DrinkAppContextModelSnapshot : ModelSnapshot
+    [Migration("20201018171447_AddedDrinkReviews")]
+    partial class AddedDrinkReviews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +43,6 @@ namespace DrinkManagerWeb.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsFavourite")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsReviewed")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")

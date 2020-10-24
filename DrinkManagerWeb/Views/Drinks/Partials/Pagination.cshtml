@@ -6,8 +6,7 @@
 <nav>
     <ul class="pagination">
         <li class="page-item @prevDisabled">
-            <a asp-route-sortOrder="@ViewData["CurrentSort"]"
-               asp-route-pageNumber="@(Model.Drinks.PageIndex - 1)"
+            <a asp-route-pageNumber="@(Model.Drinks.PageIndex - 1)"
                asp-route-searchString="@ViewData["SearchString"]"
                asp-route-searchCondition="@ViewData["SearchCondition"]"
                asp-route-alcoholics="@ViewData["Alcoholics"]"
