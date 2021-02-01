@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DrinkManagerWeb.Models
+namespace DrinkManagerWeb.Models.ViewModels
 {
-    public class RoleModification
+    public class RoleModificationViewModel
     {
         [Required]
         public string RoleName { get; set; }

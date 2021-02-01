@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace DrinkManagerWeb.Models
+namespace DrinkManagerWeb.Models.ViewModels
 {
-    public class RoleEdit
+    public class RoleEditViewModel
     {
         public IdentityRole Role { get; set; }
         public IEnumerable<AppUser> Members { get; set; }
