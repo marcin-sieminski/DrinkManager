@@ -325,7 +325,7 @@
     <value>Kiedy jakiś drink Ci zasmakuje, możesz dodać go do listy swoich ulubionych drinków</value>
   </data>
   <data name="WithThisAppYouCanSearchDrinksByTheir" xml:space="preserve">
-    <value>Za pomocą tej aplikacji możesz wyszukiwać drinków za pomocą ich</value>
+    <value>Za pomocą tej aplikacji możesz wyszukiwać drinki za pomocą ich</value>
   </data>
   <data name="YouCanAlsoAdd" xml:space="preserve">
     <value>Możesz także dodać</value>
@@ -337,7 +337,7 @@
     <value>Edytuj</value>
   </data>
   <data name="Enjoy" xml:space="preserve">
-    <value>Zdrówko</value>
+    <value>Udanego korzystania</value>
   </data>
   <data name="ReviewText" xml:space="preserve">
     <value>Treść recenzji</value>

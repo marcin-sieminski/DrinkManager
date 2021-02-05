@@ -319,7 +319,7 @@
     <value>Use another service to register</value>
   </data>
   <data name="WelcomeInDrinkManagerApp" xml:space="preserve">
-    <value>Welcome in Drink Manager App</value>
+    <value>Welcome to Drink Manager App</value>
   </data>
   <data name="WhenYouFindYourBelovedDrink" xml:space="preserve">
     <value>When you find your beloved drink you can add it to your list of favourite drinks</value>
