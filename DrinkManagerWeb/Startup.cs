@@ -129,13 +129,13 @@ namespace DrinkManagerWeb
                 endpoints.MapRazorPages();
             });
 
-            CreateRoles(serviceProvider).Wait();
+            CreateRolesAsync(serviceProvider);
         }
 
-        private async Task CreateRoles(IServiceProvider serviceProvider)
+        private async Task CreateRolesAsync(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
-            var user = await userManager.FindByEmailAsync(Configuration["AppSettings:AdminUserEmail"]);
+            var user = await userManager.FindByEmailAsync(Configuration["AppSettings:AdminUserEmail"]).ConfigureAwait(false);
             if (user == null)
             {
 
@@ -146,11 +146,11 @@ namespace DrinkManagerWeb
 
                 foreach (var roleName in roleNames)
                 {
-                    var roleExist = await roleManager.RoleExistsAsync(roleName);
+                    var roleExist = await roleManager.RoleExistsAsync(roleName).ConfigureAwait(false);
                     if (!roleExist)
                     {
                         //create the roles and seed them to the database
-                        await roleManager.CreateAsync(new IdentityRole(roleName));
+                        await roleManager.CreateAsync(new IdentityRole(roleName)).ConfigureAwait(false);
                     }
                 }
 
@@ -163,11 +163,11 @@ namespace DrinkManagerWeb
 
                 string userPassword = Configuration["AppSettings:UserPassword"];
 
-                var createPowerUser = await userManager.CreateAsync(powerUser, userPassword);
+                var createPowerUser = await userManager.CreateAsync(powerUser, userPassword).ConfigureAwait(false);
                 if (createPowerUser.Succeeded)
                 {
                     //here we tie the new user to the role
-                    await userManager.AddToRoleAsync(powerUser, "Admin");
+                    await userManager.AddToRoleAsync(powerUser, "Admin").ConfigureAwait(false);
                 }
             }
         }
