@@ -7,6 +7,7 @@ using DrinkManagerWeb.Middlewares;
 using DrinkManagerWeb.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Context;
 using System;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace DrinkManagerWeb
@@ -28,7 +32,6 @@ namespace DrinkManagerWeb
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DrinkAppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -84,7 +87,6 @@ namespace DrinkManagerWeb
                 .AddRazorPages()
                 .AddViewLocalization();
 
-
             services.AddScoped<RequestLocalizationCookiesMiddleware>();
             services.AddControllersWithViews().
                 AddRazorRuntimeCompilation().
@@ -97,7 +99,6 @@ namespace DrinkManagerWeb
             services.AddHttpContextAccessor();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
@@ -107,14 +108,40 @@ namespace DrinkManagerWeb
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.Use(async (ctx, next) =>
+            {
+                IPAddress tempRemoteIpAddress = ctx.Connection.RemoteIpAddress;
+                var remoteIpAddress = "";
+                if (tempRemoteIpAddress != null)
+                {
+                    if (tempRemoteIpAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                    {
+                        tempRemoteIpAddress = (await Dns.GetHostEntryAsync(tempRemoteIpAddress)).AddressList
+                            .First(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                    }
+
+                    remoteIpAddress = tempRemoteIpAddress.ToString();
+                }
+                using (LogContext.PushProperty("IPAddress", remoteIpAddress))
+                {
+                    await next();
+                }
+            });
+
+            app.UseSerilogRequestLogging();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRequestLocalization();
             app.UseRequestLocalizationCookies();
-            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
