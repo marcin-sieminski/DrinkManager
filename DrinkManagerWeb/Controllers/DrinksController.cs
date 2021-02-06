@@ -26,7 +26,7 @@ namespace DrinkManagerWeb.Controllers
         private readonly IReviewRepository _reviewRepository;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly UserManager<AppUser> _userManager;
-        private readonly int _pageSize = 12;
+        private const int PageSize = 12;
 
         public DrinksController(
             IDrinkRepository drinkRepository,
@@ -52,7 +52,7 @@ namespace DrinkManagerWeb.Controllers
             var drinks = _drinkRepository.GetAllDrinks().OrderBy(x => x.Name);
             var model = new DrinksViewModel
             {
-                Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks, pageNumber ?? 1, _pageSize)
+                Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks, pageNumber ?? 1, PageSize)
             };
             return View(model);
         }
@@ -85,7 +85,7 @@ namespace DrinkManagerWeb.Controllers
 
             var model = new DrinksViewModel
             {
-                Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks, pageNumber ?? 1, _pageSize)
+                Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks, pageNumber ?? 1, PageSize)
             };
             return View(model);
         }
@@ -309,7 +309,7 @@ namespace DrinkManagerWeb.Controllers
 
             var model = new DrinksViewModel
             {
-                Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks, pageNumber ?? 1, _pageSize)
+                Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks, pageNumber ?? 1, PageSize)
             };
             return View(model);
         }
@@ -326,7 +326,7 @@ namespace DrinkManagerWeb.Controllers
             //user choices while going through PaginatedList pages
             var model = new DrinksViewModel
             {
-                Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks, pageNumber ?? 1, _pageSize),
+                Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks, pageNumber ?? 1, PageSize),
                 Alcoholics = alcoholics,
                 NonAlcoholics = nonAlcoholics,
                 OptionalAlcoholics = optionalAlcoholics
@@ -350,7 +350,7 @@ namespace DrinkManagerWeb.Controllers
             var model = new DrinksViewModel
             {
                 Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks.AsEnumerable(),
-                    pageNumber ?? 1, _pageSize)
+                    pageNumber ?? 1, PageSize)
             };
             return View(model);
         }
@@ -378,7 +378,7 @@ namespace DrinkManagerWeb.Controllers
             var model = new DrinksViewModel
             {
                 Drinks = PaginatedList<Drink>.CreatePaginatedList(drinks,
-                    pageNumber ?? 1, _pageSize)
+                    pageNumber ?? 1, PageSize)
             };
             return View(model);
         }

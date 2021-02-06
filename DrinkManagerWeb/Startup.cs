@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Context;
 using System;
 using System.Threading.Tasks;
 
@@ -110,11 +111,20 @@ namespace DrinkManagerWeb
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.Use(async (ctx, next) =>
+            {
+                using (LogContext.PushProperty("IPAddress", ctx.Connection.RemoteIpAddress))
+                {
+                    await next();
+                }
+            });
+            app.UseSerilogRequestLogging();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRequestLocalization();
             app.UseRequestLocalizationCookies();
-            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
