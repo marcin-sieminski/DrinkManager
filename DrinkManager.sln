@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrinkManagerConsole", "DrinkManagerConsole\DrinkManagerConsole.csproj", "{F7922A4C-6EBC-4A72-91D8-A9BEE710A832}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{14FF32FF-79CF-4ED0-9BB6-0599ACB7FE5E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrinkManagerWeb", "DrinkManagerWeb\DrinkManagerWeb.csproj", "{74234F95-DD28-4135-B766-5D1607DED706}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{74113DD9-0DAC-4BC9-9EAC-8EB1F63DD0D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportingModuleApi", "ReportingModule\ReportingModuleApi.csproj", "{0677804A-2073-4C8F-BD7C-71B66200FF68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReportingModuleApi", "ReportingModule\ReportingModuleApi.csproj", "{0677804A-2073-4C8F-BD7C-71B66200FF68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F7922A4C-6EBC-4A72-91D8-A9BEE710A832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7922A4C-6EBC-4A72-91D8-A9BEE710A832}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7922A4C-6EBC-4A72-91D8-A9BEE710A832}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7922A4C-6EBC-4A72-91D8-A9BEE710A832}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14FF32FF-79CF-4ED0-9BB6-0599ACB7FE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14FF32FF-79CF-4ED0-9BB6-0599ACB7FE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14FF32FF-79CF-4ED0-9BB6-0599ACB7FE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
